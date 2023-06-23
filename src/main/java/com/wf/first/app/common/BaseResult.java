@@ -30,4 +30,8 @@ public class BaseResult<T> {
         return new <T>BaseResult<T>(null, "500", msg);
     }
 
+    public static <T>BaseResult<T> noAuth () {
+        return new <T>BaseResult<T>(null,"40000", "未登录，无权限");
+    }
+
 }
