@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@NoArgsConstructor
 @Data
 @TableName("user")
 public class User {
