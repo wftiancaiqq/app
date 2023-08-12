@@ -24,28 +24,29 @@ public class LoginController {
 
     private RedisUtil redisUtil;
 
-    @PostMapping("/login")
-    public BaseResult<String> login(@RequestBody User user) {
-        List<User> userList = userService.getBaseMapper().selectList(new QueryWrapper<User>()
-                .lambda()
-                .eq(User::getUserName, user.getUserName())
-                .eq(User::getPassword, user.getPassword()));
-        if (CollectionUtils.isEmpty(userList)) {
-            return BaseResult.fail("用户名或密码错误");
-        }
-
-        String uuid = UUID.randomUUID().toString();
-        redisUtil.set(uuid, uuid, 60*30);
-        return BaseResult.success(uuid);
-    }
-
-    @PostMapping("/testToken")
-    public BaseResult<Boolean> testToken(@RequestBody User user) {
-        return BaseResult.success();
-    }
+//    @PostMapping("/login")
+//    public BaseResult<String> login(@RequestBody User user) {
+//        List<User> userList = userService.getBaseMapper().selectList(new QueryWrapper<User>()
+//                .lambda()
+//                .eq(User::getUserName, user.getUserName())
+//                .eq(User::getPassword, user.getPassword()));
+//        if (CollectionUtils.isEmpty(userList)) {
+//            return BaseResult.fail("用户名或密码错误");
+//        }
+//
+//        String uuid = UUID.randomUUID().toString();
+//        redisUtil.set(uuid, uuid, 60*30);
+//        return BaseResult.success(uuid);
+//    }
+//
+//    @PostMapping("/testToken")
+//    public BaseResult<Boolean> testToken(@RequestBody User user) {
+//        return BaseResult.success();
+//    }
 
     @PostMapping("/noAuth")
     public BaseResult<Boolean> noAuth(@RequestBody User user) {
         return BaseResult.noAuth();
     }
+    //Collection
 }

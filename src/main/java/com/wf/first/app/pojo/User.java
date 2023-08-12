@@ -13,7 +13,7 @@ public class User {
 
     @TableId(value = "id", type= IdType.AUTO)
     private Long id;
-    private String userName;
+    private String account;
     private String password;
-    private String email;
+
 }

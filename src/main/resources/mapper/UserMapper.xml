@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wf.first.app.mapper.UserMapper">
+    <resultMap id="BaseMap" type="com.wf.first.app.pojo.User">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+    </resultMap>
+    <sql id="baseSql">
+        id as id
+    </sql>
+
+    <select id="selectByUserId" resultMap="BaseMap">
+        select * from user where id = #{id};
+    </select>
+    <select id="selectBySelective" resultType="com.wf.first.app.dto.UserDTO">
+        select
+        <include refid="baseSql"/>
+        from user
+        where id = #{id} and account = #{account} and password = #{password};
+    </select>
+    <select id="selectList" resultType="com.wf.first.app.pojo.User">
+        select * from user;
+    </select>
+    <select id="selectListByList" resultType="com.wf.first.app.pojo.User">
+        select * from user
+        <where>
+            <if test="dto.idList != null and dto.idList.size() > 0">
+                and account in
+                <foreach collection="dto.idList" separator="," open="(" close=")" item="item">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="dto.a != null and dto.a != ''">
+                and a = #{a}
+            </if>
+        </where>
+    </select>
+</mapper>
