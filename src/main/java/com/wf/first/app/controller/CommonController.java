@@ -20,6 +20,9 @@ public class CommonController {
 
     @PostMapping("/upload")
     public BaseResult<String> upload(@RequestBody MultipartFile file) {
+        if (file == null) {
+            return BaseResult.fail("文件不能为空");
+        }
         String fileName = file.getOriginalFilename();
         String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
         if (!StringUtils.equals(extension, "jpg") && !StringUtils.equals(extension, "jpeg")) {

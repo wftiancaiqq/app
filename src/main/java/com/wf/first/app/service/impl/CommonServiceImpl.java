@@ -19,7 +19,7 @@ public class CommonServiceImpl implements CommonService {
         UUID uuid = UUID.randomUUID();
         String newFileName = uuid.toString() + extension;
         String url = FILE_HOST + "/avatar/" + newFileName;
-        File storeFile = new File("E:/谷歌浏览器下载/nginx-1.24.0/images/avatar/" + newFileName);
+        File storeFile = new File("E:/nginx-1.24.0/images/avatar/" + newFileName);
         FileOutputStream fos =null;
         try {
             fos = new FileOutputStream(storeFile);
