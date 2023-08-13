@@ -28,4 +28,6 @@ public class User {
     private Long roleId;
 
     private Integer isAdmin;
+
+    private Long regionId;
 }

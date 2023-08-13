@@ -17,5 +17,34 @@
         <result column="role_id" property="roleId"/>
         <result column="is_admin" property="isAdmin"/>
     </resultMap>
-
+    <select id="listUser" resultType="com.wf.first.app.vo.UserVO">
+        SELECT
+            a.id,
+            a.user_name AS userName,
+            a.is_deleted AS isDeleted,
+            c.id AS regionId,
+            c.region,
+            b.role_name AS roleName
+        FROM
+            user a
+                LEFT JOIN
+            role b ON a.role_id = b.id
+                LEFT JOIN
+            region c ON a.region_id = c.id
+        <where>
+            <if test="regionId != null">
+                and c.id = #{regionId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and a.user_name = #{userName}
+            </if>
+            <if test="isDeleted != null">
+                and a.is_deleted = #{isDeleted}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and b.role_name = #{roleName}
+            </if>
+        </where>
+        order by a.gmt_create desc
+    </select>
 </mapper>
